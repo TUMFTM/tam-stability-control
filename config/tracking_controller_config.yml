@@ -1,0 +1,15 @@
+/core/control/TrackingController:
+  ros__parameters:
+    tS: 0.01 # control loop time step
+    # --- Longitudinal Tracking ---
+    lookahead_time_long_ff_s: 0.08 # longitudinal lookahead time
+    velocity_p_gain: 2.0 # proportional gain for velocity tracking
+    vel_error_filter_time_constant: 0.5 # velocity error filter time constant
+
+    # --- Lateral Tracking ---
+    lookahead_time_lat_ff_s: 0.0 # lookahead time for curvature based feedforward steering
+    lookahead_time_lat_s: 0.45 # Pure Pursuit lookahead time
+    min_lookahead_distance_lat_m: 0.1 # Pure Pursuit minimum lookahead distance
+    curvature_lookahead_gain: 0.00004 # Pure Pursuit curvature lookahead (more lookahead on straight)
+    curvature_filter_Ts: 0.005 # Pure Pursuit curvature filter time constant
+    enable_lat_feedforward_perc: 0.5 # Add this percentage of the curvature based feedforward to the Pure Pursuit output

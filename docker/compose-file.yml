@@ -1,0 +1,29 @@
+services:
+  tracking_controller:
+    image: stability_control:v1
+    command: bash -c "ros2 run --prefix 'chrt -rr 90' tracking_controller_node_cpp tracking_controller_node --ros-args --params-file /ws/config/tracking_controller_config.yml"
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - ../config:/ws/config
+      - ../config/vehicle_handler:/ws/install/vehicle_handler_cpp/share/vehicle_handler_cpp/config_overwrite
+      - /var/run/lttng:/var/run/lttng
+      - /dev/shm:/dev/shm
+      - /tmp:/tmp
+    init: true
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+  stability_controller:
+    image: stability_control:v1
+    command: bash -c "ros2 run --prefix 'chrt -rr 95' stability_controller_node_cpp stability_controller_node --ros-args --params-file /ws/config/stability_controller_config.yml"
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - ../config:/ws/config
+      - ../config/vehicle_handler:/ws/install/vehicle_handler_cpp/share/vehicle_handler_cpp/config_overwrite
+      - /var/run/lttng:/var/run/lttng
+      - /dev/shm:/dev/shm
+      - /tmp:/tmp
+    init: true
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}

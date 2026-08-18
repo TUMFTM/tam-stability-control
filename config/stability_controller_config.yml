@@ -1,0 +1,126 @@
+/core/control/StabilityController:
+  ros__parameters:
+    # --- General ---
+    tS: 0.01 # control loop time step
+    P_VDC_MinVelSlipCalc_mps: 5.0
+    P_VDC_brake_bias_front: 0.58
+    brake_bias_shift:
+        # relative to current brake bias
+        values: [-0.101, -0.0475, 0.00]
+        vel_interp_mps: [20.0, 35.0, 60.0]
+    
+    # --- Slip Control ---
+    SlipControl:
+      slip_angle_filter_pole: 0.7
+      shift_pressure_reduction:
+        reduction_factor: 0.85
+        duration_pressure_reduction: 0.05
+        duration_gearshift_initiation: 0.15
+      # --- ABS ---
+      ABS:
+        # --- General ---
+        enabled: True
+        operation_mode: 0 # 0 = wheel individual, 1=front/rear split, 2=all wheels, 3=rear only
+        min_activation_velocity: 5.0
+        min_long_force: -2500.0 # Min negative longitudinal force to activate abs
+        activation_time_after_gearshift: 0.1
+        slip_vertical_load_weighted: False
+        use_virtual_slips: False
+        use_error_in_increase: False
+        slip_angle_max: 0.07
+        slip_threshold_reduction_factor: 0.3
+        moving_average_fx_window_length: 50
+        # --- Front Axle ---
+        front:
+        # --- Reduce and Increase step sizes ---
+          reduce_initial_pressure_ratio: 0.7
+          increase_initial_pressure_ratio: 0.45
+          reduce_step: 0.038
+          increase_step: 0.023
+          increase_step_target_increase: 0.015
+        # --- Slip Thresholds for State Transitions ---
+          slip_threshold_hold_reduce: -10.0
+          slip_threshold_reduce_hold: -12.0
+          slip_threshold_hold_increase: -25.0
+          slip_threshold_increase_hold: -15.0
+          slip_threshold_safe: -7.0
+        # --- ABS Safety Feature ---
+          fx_safety_threshold_factor: 0.4
+        # --- rear axle ---
+        rear:
+        # --- Reduce and increase step sizes ---
+          reduce_initial_pressure_ratio: 0.65
+          increase_initial_pressure_ratio: 0.45
+          reduce_step: 0.038
+          increase_step: 0.023
+          increase_step_target_increase: 0.015
+        # --- Slip Thresholds for State Transitions ---
+          slip_threshold_hold_reduce: -10.0
+          slip_threshold_reduce_hold: -12.0
+          slip_threshold_hold_increase: -17.0
+          slip_threshold_increase_hold: -12.0
+          slip_threshold_safe: -7.0
+        # --- ABS Safety Feature ---
+          fx_safety_threshold_factor: 0.4
+      # --- TC ---
+      TC:
+        # --- General ---
+        enabled: True
+        operation_mode: 3 # 0 = wheel individual, 1=front/rear split, 2=all wheels, 3=rear only
+        min_activation_velocity: 1.0
+        activation_time_after_gearshift: 0.1
+        deactivation_duration: 0.5
+        use_virtual_slips: False
+        use_error_in_increase: False
+        slip_vertical_load_weighted: True
+        slip_filter_pole: 0.8
+        max_slip_throttle_cut: 25.0
+        slip_threshold_reduction_factor: 0.48
+        slip_angle_max: 0.07
+        # --- Rear Axle ---
+        rear:
+        # -- Reduce and increase step sizes ---
+          reduce_initial_pressure_ratio: 0.82
+          reduce_step: 0.04
+          increase_step: 0.018
+        # -- Slip Thresholds for State Transitions ---
+          slip_threshold_reduce_hold: 9.0
+          slip_threshold_hold_increase: 15.0
+          slip_threshold_increase_hold: 12.0
+          slip_threshold_hold_reduce: 8.0
+          slip_threshold_safe: 6.0
+    
+    # --- Electronic Stability Control ---
+    ESC:
+      # --- General ---
+      enabled: True
+      max_brake_pressure: 60.0
+      # --- Yaw Rate PID ---
+      tS_psi_dot: 0.92
+      kp_psi_dot: 8.0
+      ki_psi_dot: 1.0
+      kd_psi_dot: 0.6
+      # --- Slip Angle PID ---
+      tS_beta: 0.9
+      kp_beta: 25.0
+      ki_beta: 8.0
+      kd_beta: 1.0
+      # --- Maximum Values ---
+      max_integrator_yaw_moment: 1325.0
+      max_brake_pressure: 80.0
+      # --- Activation and Deactivation Thresholds ---
+      threshold_velocities: [25.0, 50.0]
+      beta_threshold_activate: [0.035, 0.0174]
+      beta_threshold_deactivate: 0.035
+      psi_dot_error_threshold_activate: [0.0401, 0.0349]
+      psi_dot_error_threshold_deactivate: 0.026
+      beta_error_threshold_activate: [0.061, 0.035]
+      beta_error_threshold_deactivate: 0.018
+      min_activation_velocity: 7.0
+
+    # --- Countersteer System ---
+    countersteer_system:
+      enabled: True
+      slip_angle_filter_Ts: 0.15
+      enable_sideslip: 0.009
+      steering_factor: 1.0

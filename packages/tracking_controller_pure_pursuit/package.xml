@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>tracking_controller_pure_pursuit</name>
+  <version>0.0.1</version>
+  <description>Pure-pursuit tracking controller for TUM Autonomous Motorsport.</description>
+  <maintainer email="phillip.pitschi@tum.de">Phillip Pitschi</maintainer>
+  <license>LGPLv3</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>param_management_cpp</depend>
+  <depend>tum_types_cpp</depend>
+  <depend>tum_helpers_cpp</depend>
+  <depend>tracking_controller_base_cpp</depend>
+  <depend>limit_handler_cpp</depend>
+  <depend>tsl_logger_cpp</depend>
+  <depend>ament_index_cpp</depend>
+  <depend>controller_helpers_cpp</depend>
+  <depend>vehicle_handler_cpp</depend>
+  <depend>stability_control_tam_cpp</depend>
+  
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_clang_format</test_depend>
+  <test_depend>ament_cmake_cpplint</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
