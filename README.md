@@ -3,6 +3,7 @@
 [![Linux](https://img.shields.io/badge/os-linux-blue.svg)](https://www.linux.org/)
 [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://www.docker.com/)
 [![ROS 2 Jazzy](https://img.shields.io/badge/ros2-jazzy-blue.svg)](https://docs.ros.org/en/jazzy/index.html)
+[![Paper](https://img.shields.io/badge/Paper-10.48550%2FarXiv.2608.17779-blue?logo=doi&logoColor=white)](https://doi.org/10.48550/arXiv.2608.17779)
 
 This repository provides a vehicle stability-control system that can safeguard an arbitrary motion controller for real-world testing in autonomous racing. Its core is the `stability_control_tam_cpp` package, which combines wheel-slip estimation, Anti-lock Braking System (ABS), Traction Control (TC), Electronic Stability Control (ESC), and active countersteering.
 
@@ -88,24 +89,24 @@ docker compose -f docker/compose-file.yml up
 - [`config/tracking_controller_config.yml`](config/tracking_controller_config.yml) configures the included example tracking controller.
 - [`config/vehicle_handler`](config/vehicle_handler) contains vehicle and tire configurations used by the vehicle model.
 
-<!-- ## References
+## References
 
 If you use the Stability Controller in your work please consider citing our paper:
 
-[Stability Control for Real World Testing in Autonomous Racing](https://arxiv.org/abs/)
+[Stability Control for Real World Testing in Autonomous Racing](https://arxiv.org/abs/2608.17779)
 
 
 ```
-@misc{pitschi2026,
+@misc{pitschi2026stabilitycontrolrealworld,
       title={Stability Control for Real World Testing in Autonomous Racing}, 
       author={Phillip Pitschi and Simon Sagmeister and Frederik Werner and Markus Lienkamp and Boris Lohmann},
       year={2026},
-      eprint={},
+      eprint={2608.17779},
       archivePrefix={arXiv},
-      primaryClass={eess.SY},
-      url={https://arxiv.org/abs/}, 
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2608.17779}, 
 }
-``` -->
+```
 
 ## Contact
 
